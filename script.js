@@ -47,8 +47,19 @@ function createIcon (classes){
     icon.className = classes;
     return icon;
 }
+// remove item function creating.
+function removeItem(e){
+    //parent element has the class name "remove-item"?
+    if(e.target.parentElement.classList.contains('remove-item')){
+        // found remove-item class then 2 parent element up to reach list-items and remove.
+        e.target.parentElement.parentElement.remove();
+    }
+
+}
+
 
 // add event listener item form.
 itemForm.addEventListener('submit', addItem);
+itemList.addEventListener('click', removeItem)
 
 

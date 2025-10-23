@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript HTML DOM</h2>
+<p>Add a new HTML Element.</p>
+
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+
+</div>
+
+<script>
+const para = document.createElement('p');
+
+const node = document.createTextNode("this one is last paragr.");
+para.appendChild(node);
+
+const div = document.getElementById('div1');
+div.appendChild(para).id ='p3';
+
+</script>
+
+</body>
+</html>
