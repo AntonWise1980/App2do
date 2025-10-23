@@ -1,6 +1,7 @@
 const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
+const clearBtn = document.getElementById('clear');
 
 function addItem (e){
     e.preventDefault(); // because not using yet local storage.
@@ -57,9 +58,17 @@ function removeItem(e){
 
 }
 
+function clearItems(){
+    
+    while(itemList.firstChild){
+        itemList.removeChild(itemList.firstChild);
+    }
+
+}
 
 // add event listener item form.
-itemForm.addEventListener('submit', addItem);
+itemForm.addEventListener('submit', addItem)
 itemList.addEventListener('click', removeItem)
+clearBtn.addEventListener('click', clearItems)
 
 
