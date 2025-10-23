@@ -2,6 +2,8 @@ const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
+const itemFilter = document.getElementById('filter');
+
 
 function addItem (e){
     e.preventDefault(); // because not using yet local storage.
@@ -30,9 +32,15 @@ function addItem (e){
     // new I can add button to the li element.
     li.appendChild(button);
 
+    
+
     itemList.appendChild(li);
+    checkUI();
+
     // input clear
     itemInput.value='';
+    // again I have to check ui status with checkUI() function. Because list is loaded now.
+    
    
 }
 
@@ -55,6 +63,7 @@ function removeItem(e){
         // found remove-item class then 2 parent element up to reach list-items and remove.
         e.target.parentElement.parentElement.remove();
     }
+    checkUI();
 
 }
 
@@ -63,12 +72,25 @@ function clearItems(){
     while(itemList.firstChild){
         itemList.removeChild(itemList.firstChild);
     }
-
+    checkUI();
 }
+function checkUI (){
+    const items = itemList.querySelectorAll('li');
+    if(items.length===0){
+        clearBtn.style.display = "none";
+        itemFilter.style.display = "none";
+    } else {
+        clearBtn.style.display='block';
+        itemFilter.style.display='block';
+    }
+}
+
 
 // add event listener item form.
 itemForm.addEventListener('submit', addItem)
 itemList.addEventListener('click', removeItem)
 clearBtn.addEventListener('click', clearItems)
+
+checkUI();
 
 
