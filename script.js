@@ -3,7 +3,7 @@ const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 
 function addItem (e){
-    e.preventDefault();
+    e.preventDefault(); // because not using yet local storage.
 
     // get the new item from item input value.
     const newItem = itemInput.value;
@@ -12,14 +12,13 @@ function addItem (e){
         alert('please add something.');
         return;
     }
-    
+
     // now create list item
     const li = document.createElement('li');
     li.appendChild(document.createTextNode(newItem));
     
     // reach the button class with function.
     const button = createButton('remove-item btn-link text-red');
-
 
     // reach the icon
     const icon = createIcon('fa-solid fa-xmark')
@@ -35,6 +34,7 @@ function addItem (e){
     itemInput.value='';
    
 }
+
 // button class function for change button class name.
 function createButton(classes){
     const button = document.createElement('button');
@@ -50,3 +50,5 @@ function createIcon (classes){
 
 // add event listener item form.
 itemForm.addEventListener('submit', addItem);
+
+
