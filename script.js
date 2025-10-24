@@ -5,6 +5,7 @@ const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 
 
+// Function for addItem.
 function addItem (e){
     e.preventDefault(); // because not using yet local storage.
     // get the new item from item input value.
@@ -30,23 +31,24 @@ function addItem (e){
     // new I can add button to the li element.
     li.appendChild(button);
     itemList.appendChild(li);
+    //checkui because hiding buttons depends on status ui.
     checkUI();
     // input clear
     itemInput.value=''; 
 }
-// button class function for change button class name.
+// Function return button with class name.
 function createButton(classes){
     const button = document.createElement('button');
     button.className=classes;
     return button;
 }
-// for icons create function.
+// Function return icons with class name.
 function createIcon (classes){
     const icon = document.createElement('i');
     icon.className = classes;
     return icon;
 }
-// remove item function creating.
+// Function remove item from the list.
 function removeItem(e){
     //parent element has the class name "remove-item"?
     if(e.target.parentElement.classList.contains('remove-item')){
@@ -58,20 +60,19 @@ function removeItem(e){
     // dont forget the status ui.
     checkUI();
 }
-
+// Function remove all items from the list.
 function clearItems(){
     while(itemList.firstChild){
         itemList.removeChild(itemList.firstChild);
     }
     checkUI();
 }
-
+// Function filter item list.
 function filterItems(e){
     const text = e.target.value;
     console.log(text);
-
 }
-
+// Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
     const items = itemList.querySelectorAll('li');
     if(items.length===0){
@@ -82,7 +83,8 @@ function checkUI (){
         itemFilter.style.display='block';
     }
 }
-// add event listener item form.
+
+// Event listeners.
 itemForm.addEventListener('submit', addItem)
 itemList.addEventListener('click', removeItem)
 clearBtn.addEventListener('click', clearItems)
