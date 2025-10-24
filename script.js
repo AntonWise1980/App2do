@@ -69,8 +69,21 @@ function clearItems(){
 }
 // Function filter item list.
 function filterItems(e){
-    const text = e.target.value;
-    console.log(text);
+    // itemList not in the global scope that is the reason again created.
+    const items = itemList.querySelectorAll('li');
+    // I am doing target value lowerACase and assing text variable.
+    const text = e.target.value.toLowerCase();
+
+    items.forEach((item)=>{
+        // each item value taking itemname variable with lowercase.
+        const itemName = item.firstChild.textContent.toLowerCase();
+        // checking itemname has the text or not.
+        if(itemName.indexOf(text)!= -1){
+            item.style.display = 'flex';
+        }else{
+            item.style.display = 'none';
+        }
+    });
 }
 // Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
