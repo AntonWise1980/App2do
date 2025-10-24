@@ -7,43 +7,33 @@ const itemFilter = document.getElementById('filter');
 
 function addItem (e){
     e.preventDefault(); // because not using yet local storage.
-
     // get the new item from item input value.
     const newItem = itemInput.value;
-    //simple validate input
+    //simple validate input value
     if(newItem === ''){
         alert('please add something.');
         return;
     }
-
+    if(newItem.length>10){
+        alert(`input less than ${newItem.length} character item.`);
+        return;
+    }
     // now create list item
     const li = document.createElement('li');
     li.appendChild(document.createTextNode(newItem));
-    
     // reach the button class with function.
     const button = createButton('remove-item btn-link text-red');
-
     // reach the icon
     const icon = createIcon('fa-solid fa-xmark')
-
     // add icon to the button
     button.appendChild(icon)
-
     // new I can add button to the li element.
     li.appendChild(button);
-
-    
-
     itemList.appendChild(li);
     checkUI();
-
     // input clear
-    itemInput.value='';
-    // again I have to check ui status with checkUI() function. Because list is loaded now.
-    
-   
+    itemInput.value=''; 
 }
-
 // button class function for change button class name.
 function createButton(classes){
     const button = document.createElement('button');
@@ -63,16 +53,13 @@ function removeItem(e){
         // found remove-item class then 2 parent element up to reach list-items and remove.
         if(confirm('Are you sure delete?')){
             e.target.parentElement.parentElement.remove();
-        }
-        
+        } 
     }
     // dont forget the status ui.
     checkUI();
-
 }
 
 function clearItems(){
-    
     while(itemList.firstChild){
         itemList.removeChild(itemList.firstChild);
     }
@@ -95,7 +82,6 @@ function checkUI (){
         itemFilter.style.display='block';
     }
 }
-
 // add event listener item form.
 itemForm.addEventListener('submit', addItem)
 itemList.addEventListener('click', removeItem)
