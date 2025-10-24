@@ -36,18 +36,21 @@ function addItem (e){
     // input clear
     itemInput.value=''; 
 }
+
 // Function return button with class name.
 function createButton(classes){
     const button = document.createElement('button');
     button.className=classes;
     return button;
 }
+
 // Function return icons with class name.
 function createIcon (classes){
     const icon = document.createElement('i');
     icon.className = classes;
     return icon;
 }
+
 // Function remove item from the list.
 function removeItem(e){
     //parent element has the class name "remove-item"?
@@ -60,6 +63,7 @@ function removeItem(e){
     // dont forget the status ui.
     checkUI();
 }
+
 // Function remove all items from the list.
 function clearItems(){
     while(itemList.firstChild){
@@ -67,6 +71,7 @@ function clearItems(){
     }
     checkUI();
 }
+
 // Function filter item list.
 function filterItems(e){
     // itemList not in the global scope that is the reason again created.
@@ -85,6 +90,7 @@ function filterItems(e){
         }
     });
 }
+
 // Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
     const items = itemList.querySelectorAll('li');
