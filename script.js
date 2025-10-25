@@ -6,7 +6,7 @@ const itemFilter = document.getElementById('filter');
 
 
 // Function for addItem.
-function addItem (e){
+function onAddItemSubmit (e){
     e.preventDefault(); // because not using yet local storage.
     // get the new item from item input value.
     const newItem = itemInput.value;
@@ -19,9 +19,22 @@ function addItem (e){
         alert(`input less than ${newItem.length} character item.`);
         return;
     }
+    // call function add item to DOM.
+    addItemToDom(newItem);
+
+    // call function add item to DOM.
+    addItemToStorage(newItem);
+    //checkui because hiding buttons depends on status ui.
+    checkUI();
+    // input clear
+    itemInput.value=''; 
+}
+
+// Function for add to DOM.
+function addItemToDom(item){
     // now create list item
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(item));
     // reach the button class with function.
     const button = createButton('remove-item btn-link text-red');
     // reach the icon
@@ -31,10 +44,22 @@ function addItem (e){
     // new I can add button to the li element.
     li.appendChild(button);
     itemList.appendChild(li);
-    //checkui because hiding buttons depends on status ui.
-    checkUI();
-    // input clear
-    itemInput.value=''; 
+
+}
+
+// Function item add to localStorage
+function addItemToStorage(item){
+    let itemsFromStorage;
+
+    // check storage have items?
+    if(localStorage.getItem('items')===null){
+        itemsFromStorage = [];
+    }else{
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'));
+    }
+    itemsFromStorage.push(item);
+    //convert to json string
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
 
 // Function return button with class name.
@@ -104,11 +129,14 @@ function checkUI (){
 }
 
 // Event listeners.
-itemForm.addEventListener('submit', addItem)
+itemForm.addEventListener('submit', onAddItemSubmit)
 itemList.addEventListener('click', removeItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems )
 
 checkUI();
+
+
+
 
 
