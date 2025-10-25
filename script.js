@@ -7,7 +7,6 @@ const itemFilter = document.getElementById('filter');
 // Function display items after dom content loaded show list.
 function displayItems(){
     const itemsFromStorage = getItemFromStorage();
-
     itemsFromStorage.forEach(item=>addItemToDom(item));
     checkUI();
 }
@@ -51,6 +50,7 @@ function addItemToDom(item){
     // new I can add button to the li element.
     li.appendChild(button);
     itemList.appendChild(li);
+    itemInput.value=''; 
 
 }
 
@@ -70,7 +70,7 @@ function createIcon (classes){
 
 // Function item add to localStorage
 function addItemToStorage(item){
-    const itemsFromStorage = getItemFromStorage();
+    let itemsFromStorage;
 
     // check storage have items?
     if(localStorage.getItem('items')===null){
@@ -150,7 +150,6 @@ function checkUI (){
 
 // initialize program
 function init(){
-// Event listeners.
 itemForm.addEventListener('submit', onAddItemSubmit)
 itemList.addEventListener('click', removeItem)
 clearBtn.addEventListener('click', clearItems)
@@ -160,6 +159,7 @@ checkUI();
 }
 
 init();
+
 
 
 
