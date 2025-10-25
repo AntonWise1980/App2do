@@ -4,6 +4,13 @@ const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 
+// Function display items after dom content loaded show list.
+function displayItems(){
+    const itemsFromStorage = getItemFromStorage();
+
+    itemsFromStorage.forEach(item=>addItemToDom(item));
+    checkUI();
+}
 
 // Function for addItem.
 function onAddItemSubmit (e){
@@ -47,21 +54,6 @@ function addItemToDom(item){
 
 }
 
-// Function item add to localStorage
-function addItemToStorage(item){
-    let itemsFromStorage;
-
-    // check storage have items?
-    if(localStorage.getItem('items')===null){
-        itemsFromStorage = [];
-    }else{
-        itemsFromStorage = JSON.parse(localStorage.getItem('items'));
-    }
-    itemsFromStorage.push(item);
-    //convert to json string
-    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
-}
-
 // Function return button with class name.
 function createButton(classes){
     const button = document.createElement('button');
@@ -74,6 +66,34 @@ function createIcon (classes){
     const icon = document.createElement('i');
     icon.className = classes;
     return icon;
+}
+
+// Function item add to localStorage
+function addItemToStorage(item){
+    const itemsFromStorage = getItemFromStorage();
+
+    // check storage have items?
+    if(localStorage.getItem('items')===null){
+        itemsFromStorage = [];
+    }else{
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'));
+    }
+    itemsFromStorage.push(item);
+    //variable is array list still so convert it to json string to save localstore
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
+}
+
+// Function get item from storage
+function getItemFromStorage(){
+    let itemsFromStorage;
+
+    // check storage have items?
+    if(localStorage.getItem('items')===null){
+        itemsFromStorage = [];
+    }else{
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'));
+    }
+    return itemsFromStorage
 }
 
 // Function remove item from the list.
@@ -128,13 +148,21 @@ function checkUI (){
     }
 }
 
+// initialize program
+function init(){
 // Event listeners.
 itemForm.addEventListener('submit', onAddItemSubmit)
 itemList.addEventListener('click', removeItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems )
-
+document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
+}
+
+init();
+
+
+
 
 
 
