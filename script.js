@@ -96,17 +96,33 @@ function getItemFromStorage(){
     return itemsFromStorage
 }
 
-// Function remove item from the list.
-function removeItem(e){
-    //parent element has the class name "remove-item"?
+function onClickItem(e){
     if(e.target.parentElement.classList.contains('remove-item')){
-        // found remove-item class then 2 parent element up to reach list-items and remove.
-        if(confirm('Are you sure delete?')){
-            e.target.parentElement.parentElement.remove();
-        } 
+        removeItem(e.target.parentElement.parentElement);
     }
-    // dont forget the status ui.
-    checkUI();
+
+}
+
+// Function remove item from DOM.
+function removeItem(item){
+    
+    if(confirm('Are you sure delete?')){
+        // from DOM I am removing.    
+        item.remove();
+
+        // from storage removing.
+        removeItemFromStorage(item.textContent);
+            checkUI();
+        }  
+}
+
+function removeItemFromStorage(item){
+    let itemsFromStorage = getItemFromStorage();
+    
+    itemsFromStorage = itemsFromStorage.filter((i)=>i !== item);
+
+    // re-setting local storage.
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
 
 // Function remove all items from the list.
@@ -151,7 +167,7 @@ function checkUI (){
 // initialize program
 function init(){
 itemForm.addEventListener('submit', onAddItemSubmit)
-itemList.addEventListener('click', removeItem)
+itemList.addEventListener('click', onClickItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems )
 document.addEventListener('DOMContentLoaded', displayItems)
