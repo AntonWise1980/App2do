@@ -3,6 +3,7 @@ const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
+let isEditMode = false;
 
 // Function display items after dom content loaded show list.
 function displayItems(){
@@ -99,8 +100,15 @@ function getItemFromStorage(){
 function onClickItem(e){
     if(e.target.parentElement.classList.contains('remove-item')){
         removeItem(e.target.parentElement.parentElement);
+    }else{
+        setItemToEdit(e.target);
     }
 
+}
+function setItemToEdit(item){
+    isEditMode = true;
+
+    item.classList.add('edit-mode');
 }
 
 // Function remove item from DOM.
