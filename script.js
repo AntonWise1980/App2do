@@ -3,7 +3,9 @@ const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
+const formBtn = itemForm.querySelector('button');
 let isEditMode = false;
+
 
 // Function display items after dom content loaded show list.
 function displayItems(){
@@ -108,7 +110,14 @@ function onClickItem(e){
 function setItemToEdit(item){
     isEditMode = true;
 
-    item.classList.add('edit-mode');
+    itemList
+    .querySelectorAll('li')
+    .forEach((i)=> i.classList.remove('edit-mode'));// first item list class remove edit mode in case.
+
+    item.classList.add('edit-mode'); // to change color gray
+    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'; // to change button icon and name
+    formBtn.style.backgroundColor = 'green'; 
+    itemInput.value = item.textContent; //take item to input.value.
 }
 
 // Function remove item from DOM.
