@@ -28,6 +28,18 @@ function onAddItemSubmit (e){
         alert(`input less than ${newItem.length} character item.`);
         return;
     }
+
+    // If check for edit mode.
+    if (isEditMode){
+    const itemToEdit = itemList.querySelector('.edit-mode');
+
+    removeItemFromStorage(itemToEdit.textContent);
+    itemToEdit.classList.remove('edit-mode');
+    itemToEdit.remove();
+    
+    isEditMode = false;
+    checkUI();
+    }
     // call function add item to DOM.
     addItemToDom(newItem);
 
@@ -38,18 +50,7 @@ function onAddItemSubmit (e){
     // input clear
     itemInput.value=''; 
 
-    // If check for edit mode.
-    if (isEditMode){
-    const itemToEdit = itemList.querySelector('.edit-mode');
-
-    removeItemFromStorage(itemToEdit.textContent);
-    itemToEdit.classList.remove('edit-mode');
-    itemToEdit.remove();
-    isEditMode = false;
-    }
 }
-
-
 
 // Function for add to DOM.
 function addItemToDom(item){
@@ -186,6 +187,8 @@ function filterItems(e){
 
 // Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
+    itemInput.value = '';
+     
     const items = itemList.querySelectorAll('li');
     if(items.length===0){
         clearBtn.style.display = "none";
@@ -194,6 +197,10 @@ function checkUI (){
         clearBtn.style.display='block';
         itemFilter.style.display='block';
     }
+    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>Add Item';
+    formBtn.style.backgroundColor = '#333';
+    isEditMode = false;
+
 }
 
 // initialize program
