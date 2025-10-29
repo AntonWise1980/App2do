@@ -37,7 +37,19 @@ function onAddItemSubmit (e){
     checkUI();
     // input clear
     itemInput.value=''; 
+
+    // If check for edit mode.
+    if (isEditMode){
+    const itemToEdit = itemList.querySelector('.edit-mode');
+
+    removeItemFromStorage(itemToEdit.textContent);
+    itemToEdit.classList.remove('edit-mode');
+    itemToEdit.remove();
+    isEditMode = false;
+    }
 }
+
+
 
 // Function for add to DOM.
 function addItemToDom(item){
@@ -107,6 +119,7 @@ function onClickItem(e){
     }
 
 }
+
 function setItemToEdit(item){
     isEditMode = true;
 
@@ -118,6 +131,7 @@ function setItemToEdit(item){
     formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'; // to change button icon and name
     formBtn.style.backgroundColor = 'green'; 
     itemInput.value = item.textContent; //take item to input.value.
+    
 }
 
 // Function remove item from DOM.
