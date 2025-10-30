@@ -4,7 +4,10 @@ const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 const formBtn = itemForm.querySelector('button');
+
 let isEditMode = false;
+
+
 
 
 // Function display items after dom content loaded show list.
@@ -116,13 +119,12 @@ function getItemFromStorage(){
     return itemsFromStorage
 }
 
-function onClickItem(e){
-    if(e.target.parentElement.classList.contains('remove-item')){
-        removeItem(e.target.parentElement.parentElement);
-    }else{
-        setItemToEdit(e.target);
-    }
-
+function onClickItem(e) {
+    if (e.target.parentElement.classList.contains('remove-item')) {
+    removeItem(e.target.parentElement.parentElement);
+  } else if (e.target.closest('li')) {
+    setItemToEdit(e.target);
+  }
 }
 
 function checkIfItemExists(item){
@@ -132,14 +134,13 @@ function checkIfItemExists(item){
 
 function setItemToEdit(item){
     isEditMode = true;
-
     itemList
     .querySelectorAll('li')
     .forEach((i)=> i.classList.remove('edit-mode'));// first item list class remove edit mode in case.
 
     item.classList.add('edit-mode'); // to change color gray
     formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'; // to change button icon and name
-    formBtn.style.backgroundColor = 'green'; 
+    formBtn.style.backgroundColor = 'green';
     itemInput.value = item.textContent; //take item to input.value.
     
 }
@@ -211,6 +212,9 @@ function checkUI (){
     isEditMode = false;
 
 }
+
+
+
 
 // initialize program
 function init(){
