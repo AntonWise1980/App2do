@@ -1,3 +1,29 @@
+/* 
+
+This application is a "to do app" program. Some people may also refer to this program as a Shopping List. 
+While developing the program, I benefited from Bradley Traversy's tutorial. However, 
+I implemented a few missing functions that I noticed during development myself. 
+
+The features I added are as follows:  
+
+1- In the original training, there was no cancel button for when you wanted to change an item on the to-do list.
+I added a cancel button, allowing you to return to the beginning by clicking the cancel button if you decide to back out.
+
+2- I wanted to limit the number of characters that can be entered in a field. This way, 
+in case a very long item is entered, I was able to alert the user using the alert function. 
+
+3- I added a new class named btn2 for the Cancel button in my CSS class. 
+
+4- In the HTML part, I added my button with the btn2 ID next to the same button so that it is inline. 
+This way, I can reach it from CSS and adjust its design. More importantly, by setting the Display property to "none" or "inline," 
+I can target this feature from the JS code and toggle it between active/inactive. 
+In VanillaJS, I reverted whatever I changed back to its original state.
+
+Anton Wise,
+2025
+
+*/
+
 const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
@@ -6,10 +32,6 @@ const itemFilter = document.getElementById('filter');
 const formBtn = itemForm.querySelector('button');
 const cancelBtn = document.getElementById('btn2');
 let isEditMode = false;
-
-
-
-
 
 // Function display items after dom content loaded show list.
 function displayItems(){
@@ -92,7 +114,7 @@ function createIcon (classes){
     return icon;
 }
 
-// Function item add to localStorage
+// Function item add to localStorage.
 function addItemToStorage(item){
     let itemsFromStorage;
 
@@ -107,7 +129,7 @@ function addItemToStorage(item){
     localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
 
-// Function get item from storage
+// Function get item from storage.
 function getItemFromStorage(){
     let itemsFromStorage;
 
@@ -120,6 +142,7 @@ function getItemFromStorage(){
     return itemsFromStorage
 }
 
+// Function for click items event handler.
 function onClickItem(e) {
 
     if (e.target.parentElement.classList.contains('remove-item')) {
@@ -131,6 +154,7 @@ function onClickItem(e) {
   }
 }
 
+// Function for check double item comparison.
 function checkIfItemExists(item){
     itemsFromStorage = getItemFromStorage();
     if(itemsFromStorage){
@@ -141,6 +165,7 @@ function checkIfItemExists(item){
     
 }
 
+// Function for edit item.
 function setItemToEdit(item){
     isEditMode = true;
     
@@ -171,6 +196,7 @@ function removeItem(item){
         }  
 }
 
+// Function to remove item from storage.
 function removeItemFromStorage(item){
     let itemsFromStorage = getItemFromStorage();
     
@@ -226,10 +252,7 @@ function checkUI (){
 
 }
 
-
-
-
-// initialize program
+// Function to initialize program.
 function init(){
 itemForm.addEventListener('submit', onAddItemSubmit)
 itemList.addEventListener('click', onClickItem)
