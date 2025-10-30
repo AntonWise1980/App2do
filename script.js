@@ -38,7 +38,11 @@ function onAddItemSubmit (e){
     itemToEdit.remove();
     
     isEditMode = false;
-    checkUI();
+    } else {
+        if (checkIfItemExists(newItem)){
+            alert("That item alredy exits!");
+            return;
+        }
     }
     // call function add item to DOM.
     addItemToDom(newItem);
