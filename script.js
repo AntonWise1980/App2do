@@ -121,6 +121,11 @@ function onClickItem(e){
 
 }
 
+function checkIfItemExists(item){
+    itemsFromStorage = getItemFromStorage();
+    return itemsFromStorage.includes(item);
+}
+
 function setItemToEdit(item){
     isEditMode = true;
 
