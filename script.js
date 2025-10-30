@@ -40,6 +40,8 @@ function displayItems(){
     checkUI();
 }
 
+
+
 // Function for addItem.
 function onAddItemSubmit (e){
     e.preventDefault(); // because not using yet local storage.
@@ -50,7 +52,7 @@ function onAddItemSubmit (e){
         alert('please add something.');
         return;
     }
-    if(newItem.length>10){
+    if(newItem.length>20){
         alert(`input less than ${newItem.length} character item.`);
         return;
     }
@@ -82,6 +84,7 @@ function onAddItemSubmit (e){
 
 }
 
+
 // Function for add to DOM.
 function addItemToDom(item){
     // now create list item
@@ -99,6 +102,7 @@ function addItemToDom(item){
     itemInput.value=''; 
 
 }
+
 
 // Function return button with class name.
 function createButton(classes){
@@ -144,13 +148,18 @@ function getItemFromStorage(){
 
 // Function for click items event handler.
 function onClickItem(e) {
+    //when we choose item input of filter item should clear.
+    itemFilter.value = "";
 
     if (e.target.parentElement.classList.contains('remove-item')) {
     removeItem(e.target.parentElement.parentElement);
+    
 
     } else if (e.target.closest('li')) {
     
     setItemToEdit(e.target);
+    
+    
   }
 }
 
@@ -174,12 +183,21 @@ function setItemToEdit(item){
     .forEach((i)=> i.classList.remove('edit-mode'));// first item list class remove edit mode in case.
 
     item.classList.add('edit-mode'); // to change color gray
-    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'; // to change button icon and name
+    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Item'; // to change button icon and name
     formBtn.style.backgroundColor = 'green';
     itemInput.value = item.textContent; //take item to input.value.
     
     cancelBtn.style.display = 'inline';
 
+    
+}
+
+function cancelFunc(){
+    itemInput.value = "";
+    itemList.querySelectorAll('li').forEach((i)=> i.classList.remove('edit-mode'))
+    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item'; // to change button icon and name
+    formBtn.style.backgroundColor = 'black';
+    cancelBtn.style.display = 'none';
     
 }
 
@@ -246,7 +264,7 @@ function checkUI (){
         clearBtn.style.display='block';
         itemFilter.style.display='block';
     }
-    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>Add Item';
+    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>  Add Item';
     formBtn.style.backgroundColor = '#333';
     isEditMode = false;
 
@@ -255,6 +273,7 @@ function checkUI (){
 // Function to initialize program.
 function init(){
 itemForm.addEventListener('submit', onAddItemSubmit)
+cancelBtn.addEventListener('click', cancelFunc)
 itemList.addEventListener('click', onClickItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems )
