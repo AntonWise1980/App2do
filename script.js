@@ -4,8 +4,9 @@ const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 const formBtn = itemForm.querySelector('button');
-
+const cancelBtn = document.getElementById('btn2');
 let isEditMode = false;
+
 
 
 
@@ -120,20 +121,29 @@ function getItemFromStorage(){
 }
 
 function onClickItem(e) {
+
     if (e.target.parentElement.classList.contains('remove-item')) {
     removeItem(e.target.parentElement.parentElement);
-  } else if (e.target.closest('li')) {
+
+    } else if (e.target.closest('li')) {
+    
     setItemToEdit(e.target);
   }
 }
 
 function checkIfItemExists(item){
     itemsFromStorage = getItemFromStorage();
+    if(itemsFromStorage){
+        cancelBtn.style.display = 'inline';
+    }
+    cancelBtn.style.display = 'none';
     return itemsFromStorage.includes(item);
+    
 }
 
 function setItemToEdit(item){
     isEditMode = true;
+    
     itemList
     .querySelectorAll('li')
     .forEach((i)=> i.classList.remove('edit-mode'));// first item list class remove edit mode in case.
@@ -142,6 +152,9 @@ function setItemToEdit(item){
     formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item'; // to change button icon and name
     formBtn.style.backgroundColor = 'green';
     itemInput.value = item.textContent; //take item to input.value.
+    
+    cancelBtn.style.display = 'inline';
+
     
 }
 
@@ -198,7 +211,7 @@ function filterItems(e){
 // Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
     itemInput.value = '';
-     
+    cancelBtn.style.display = 'none';
     const items = itemList.querySelectorAll('li');
     if(items.length===0){
         clearBtn.style.display = "none";

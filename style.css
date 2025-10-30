@@ -70,6 +70,16 @@ header h1 {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+.btn2 {
+  background-color: #333;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: none;
   
 }
 
