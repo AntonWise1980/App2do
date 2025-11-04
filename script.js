@@ -181,14 +181,14 @@ function setItemToEdit(item){
     itemList
     .querySelectorAll('li')
     .forEach((i)=> i.classList.remove('edit-mode'));// first item list class remove edit mode in case.
-
+    
     item.classList.add('edit-mode'); // to change color gray
     formBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Item'; // to change button icon and name
     formBtn.style.backgroundColor = 'green';
     itemInput.value = item.textContent; //take item to input.value.
     
     cancelBtn.style.display = 'inline';
-
+    
     
 }
 
@@ -205,6 +205,7 @@ function cancelFunc(){
 function removeItem(item){
     
     if(confirm('Are you sure delete?')){
+        
         // from DOM I am removing.    
         item.remove();
 
@@ -249,6 +250,7 @@ function filterItems(e){
         }else{
             item.style.display = 'none';
         }
+    
     });
 }
 
