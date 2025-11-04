@@ -166,10 +166,6 @@ function onClickItem(e) {
 // Function for check double item comparison.
 function checkIfItemExists(item){
     itemsFromStorage = getItemFromStorage();
-    if(itemsFromStorage){
-        cancelBtn.style.display = 'inline';
-    }
-    cancelBtn.style.display = 'none';
     return itemsFromStorage.includes(item);
     
 }
