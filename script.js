@@ -52,7 +52,7 @@ if (newItem === '') {
     return;
 }
     if(newItem.length>15){
-        alert(`Too long..${newItem.length} Should be max 15 character.`);
+        alert(`"${newItem}" too long (${newItem.length} character)\nMaximum should be 15 char.`);
         return;
     }
 
@@ -97,7 +97,7 @@ function addItemToDom(item){
     // new I can add button to the li element.
     li.appendChild(button);
     itemList.appendChild(li);
-    itemInput.value=''; 
+    
 
 }
 
@@ -162,7 +162,7 @@ function onClickItem(e) {
 
 // Function for check double item comparison.
 function checkIfItemExists(item){
-    itemsFromStorage = getItemFromStorage();
+   const itemsFromStorage = getItemFromStorage();
     return itemsFromStorage.includes(item);
     
 }
@@ -272,7 +272,7 @@ function checkUI (){
 function enterEscapeKey(e){
 
     if (e.key === 'Enter') {
-        e.preventDefault(); // BU SATIR ÇOK ÖNEMLİ!
+        e.preventDefault();
         if (itemInput.value.trim() !== '') {
             itemForm.dispatchEvent(new Event('submit'));
         }
