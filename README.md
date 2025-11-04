@@ -2,7 +2,16 @@
 This application is a "to do app" program. Some people may also refer to this program as a Shopping List. While developing the program, I benefited from Bradley Traversy's tutorial. However, 
 I implemented a few missing functions that I noticed during development myself.
 
-The features I added are as follows:  
+The features I added are as follows: 
+
+## Features
+- Add / Edit / Delete
+- Cancel button
+- Character limit + timer
+- Enter & Escape shortcuts
+- Filtering (real-time)
+- LocalStorage
+- Responsive
 
 1- In the original training, there was no cancel button for when you wanted to change an item on the to-do list.
 I added a cancel button, allowing you to return to the beginning by clicking the cancel button if you decide to back out.
