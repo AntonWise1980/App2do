@@ -49,6 +49,7 @@ function onAddItemSubmit (e){
     //simple validate input value
 if (newItem === '') {
     alert('Lütfen bir şey yazın.');
+    itemInput.focus();
     return;
 }
     if(newItem.length>15){
@@ -273,9 +274,7 @@ function enterEscapeKey(e){
 
     if (e.key === 'Enter') {
         e.preventDefault();
-        if (itemInput.value.trim() !== '') {
-            itemForm.dispatchEvent(new Event('submit'));
-        }
+        itemForm.dispatchEvent(new Event('submit'));
     } else if (e.key === 'Escape' && isEditMode) {
         cancelFunc();
     }
