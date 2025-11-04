@@ -68,7 +68,7 @@ function onAddItemSubmit (e){
     isEditMode = false;
     } else {
         if (checkIfItemExists(newItem)){
-            alert("That item alredy exits!");
+            alert(`The item "${newItem}" already exists!`);
             return;
         }
     }
