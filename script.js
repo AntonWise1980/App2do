@@ -48,7 +48,7 @@ function onAddItemSubmit (e){
     const newItem = itemInput.value.trim(); // "   " for prevend many spaces..
     //simple validate input value
 if (newItem === '') {
-    alert('Lütfen bir şey yazın.');
+    alert('Please input and item!');
     itemInput.focus();
     return;
 }
