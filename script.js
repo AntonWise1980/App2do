@@ -204,7 +204,9 @@ function cancelFunc(){
 // Function remove item from DOM.
 function removeItem(item){
     
-    if(confirm('Are you sure delete?')){
+    if(confirm(`Are you sure delete "${item.textContent}" item?`)){
+
+        console.log(item.firstChild);
         
         // from DOM I am removing.    
         item.remove();
