@@ -66,6 +66,10 @@ if (newItem === '') {
     itemToEdit.remove();
     
     isEditMode = false;
+    // FİLTREYİ SIFIRLA → TÜM ÖĞELER GÖRÜNSÜN
+    itemFilter.value = '';
+    filterItems({ target: { value: '' } });
+
     } else {
         if (checkIfItemExists(newItem)){
             alert(`The item "${newItem}" already exists!`);
@@ -169,10 +173,13 @@ function checkIfItemExists(item){
 function setItemToEdit(item){
     isEditMode = true;
     
-    itemList
-    .querySelectorAll('li')
-    .forEach((i)=> i.classList.remove('edit-mode'));// first item list class remove edit mode in case.
-    
+    // get only visible li tags
+    itemList.querySelectorAll('li').forEach(li => {
+        if (li.style.display !== 'none') {
+            li.classList.remove('edit-mode');
+        }
+    });
+
     item.classList.add('edit-mode'); // to change color gray
     formBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Item'; // to change button icon and name
     formBtn.style.backgroundColor = 'green';
