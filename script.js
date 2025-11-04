@@ -41,8 +41,6 @@ function displayItems(){
     checkUI();
 }
 
-
-
 // Function for addItem.
 function onAddItemSubmit (e){
     e.preventDefault(); // because not using yet local storage.
@@ -85,7 +83,6 @@ function onAddItemSubmit (e){
 
 }
 
-
 // Function for add to DOM.
 function addItemToDom(item){
     // now create list item
@@ -103,7 +100,6 @@ function addItemToDom(item){
     itemInput.value=''; 
 
 }
-
 
 // Function return button with class name.
 function createButton(classes){
@@ -289,12 +285,8 @@ function charNumber(){
     charCount.style.color = length > 15 ? 'red' : '#666';
 }
 
-
-
-
 // Function to initialize program.
 function init(){
-
 itemInput.addEventListener('input', charNumber)
 itemInput.addEventListener('keydown', enterEscapeKey)
 itemForm.addEventListener('submit', onAddItemSubmit)
