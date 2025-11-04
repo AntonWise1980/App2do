@@ -98,8 +98,6 @@ function addItemToDom(item){
     // new I can add button to the li element.
     li.appendChild(button);
     itemList.appendChild(li);
-    
-
 }
 
 // Function return button with class name.
@@ -163,8 +161,7 @@ function onClickItem(e) {
 
 // Function for check double item comparison.
 function checkIfItemExists(item){
-   const itemsFromStorage = getItemFromStorage();
-    return itemsFromStorage.includes(item);
+   return getItemFromStorage().includes(item);
     
 }
 
