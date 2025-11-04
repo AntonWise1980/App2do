@@ -66,7 +66,7 @@ if (newItem === '') {
     itemToEdit.remove();
     
     isEditMode = false;
-    // FİLTREYİ SIFIRLA → TÜM ÖĞELER GÖRÜNSÜN
+    // reset filter to show all elements.
     itemFilter.value = '';
     filterItems({ target: { value: '' } });
 
