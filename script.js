@@ -45,14 +45,14 @@ function displayItems(){
 function onAddItemSubmit (e){
     e.preventDefault(); // because not using yet local storage.
     // get the new item from item input value.
-    const newItem = itemInput.value;
+    const newItem = itemInput.value.trim(); // "   " for prevend many spaces..
     //simple validate input value
-    if(newItem === ''){
-        alert('please add something.');
-        return;
-    }
+if (newItem === '') {
+    alert('Lütfen bir şey yazın.');
+    return;
+}
     if(newItem.length>15){
-        alert(`You've input${newItem.length} character. Should be max 15 character.`);
+        alert(`Too long..${newItem.length} Should be max 15 character.`);
         return;
     }
 
@@ -264,14 +264,18 @@ function checkUI (){
     formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>  Add Item';
     formBtn.style.backgroundColor = '#333';
     isEditMode = false;
+    charNumber();
 
 }
 
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
 function enterEscapeKey(e){
 
-    if (e.key === 'Enter' && itemInput == 0) {
-        itemForm.dispatchEvent(new Event('submit'));
+    if (e.key === 'Enter') {
+        e.preventDefault(); // BU SATIR ÇOK ÖNEMLİ!
+        if (itemInput.value.trim() !== '') {
+            itemForm.dispatchEvent(new Event('submit'));
+        }
     } else if (e.key === 'Escape' && isEditMode) {
         cancelFunc();
     }
@@ -299,12 +303,4 @@ checkUI();
 }
 
 init();
-
-
-
-
-
-
-
-
 
