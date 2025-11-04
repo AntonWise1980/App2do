@@ -30,6 +30,7 @@ Anton Wise,
 2025
 
 ## Demo
+https://antonapptodo.vercel.app/
 https://not2do.netlify.app/
 
 ## Features
