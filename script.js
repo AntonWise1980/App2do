@@ -270,8 +270,19 @@ function checkUI (){
 
 }
 
+// Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
+function enterEscapeKey(e){
+
+    if (e.key === 'Enter' && itemInput == 0) {
+        itemForm.dispatchEvent(new Event('submit'));
+    } else if (e.key === 'Escape' && isEditMode) {
+        cancelFunc();
+    }
+}
+
 // Function to initialize program.
 function init(){
+itemInput.addEventListener('keydown', enterEscapeKey)
 itemForm.addEventListener('submit', onAddItemSubmit)
 cancelBtn.addEventListener('click', cancelFunc)
 itemList.addEventListener('click', onClickItem)
