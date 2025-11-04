@@ -31,6 +31,7 @@ const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 const formBtn = itemForm.querySelector('button');
 const cancelBtn = document.getElementById('btn2');
+const charCount = document.getElementById('char-count');
 let isEditMode = false;
 
 // Function display items after dom content loaded show list.
@@ -52,8 +53,8 @@ function onAddItemSubmit (e){
         alert('please add something.');
         return;
     }
-    if(newItem.length>20){
-        alert(`input less than ${newItem.length} character item.`);
+    if(newItem.length>15){
+        alert(`You've input${newItem.length} character. Should be max 15 character.`);
         return;
     }
 
@@ -280,8 +281,21 @@ function enterEscapeKey(e){
     }
 }
 
+// Function that allows the user to specify the maximum number of characters to enter when entering an item.
+function charNumber(){
+    
+    const length = itemInput.value.length;
+    charCount.textContent = `${length} / 15`;
+    charCount.style.color = length > 15 ? 'red' : '#666';
+}
+
+
+
+
 // Function to initialize program.
 function init(){
+
+itemInput.addEventListener('input', charNumber)
 itemInput.addEventListener('keydown', enterEscapeKey)
 itemForm.addEventListener('submit', onAddItemSubmit)
 cancelBtn.addEventListener('click', cancelFunc)

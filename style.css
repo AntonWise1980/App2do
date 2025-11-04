@@ -146,6 +146,15 @@ div .btn2 {
   font-weight: 700;
 }
 
+#char-count {
+    font-size: 0.8rem;
+    color: #000000;
+    text-align: right;
+    margin-top: 5px;
+}
+
+
+
 @media (max-width: 500px) {
   .items li {
     width: 100%;
