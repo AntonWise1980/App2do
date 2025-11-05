@@ -39,6 +39,7 @@ function displayItems(){
     const itemsFromStorage = getItemFromStorage();
     itemsFromStorage.forEach(item=>addItemToDom(item));
     checkUI();
+    itemFilter.value = ''; // show all list.
 }
 
 // Function for addItem.
