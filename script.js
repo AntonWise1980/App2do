@@ -193,7 +193,6 @@ function removeItem(item){
     
     if(confirm(`Are you sure delete "${item.textContent}" item?`)){
 
-        console.log(item.firstChild);
         
         // from DOM I am removing.    
         item.remove();
