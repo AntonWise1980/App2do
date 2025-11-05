@@ -289,6 +289,14 @@ function charNumber(){
     charCount.style.color = length > 15 ? 'red' : '#666';
 }
 
+// Function allows to cancel with Esc key while edit-mode is on.
+function globalEscapeKey(e){
+
+        if (e.key === 'Escape' && isEditMode) {
+            cancelFunc();
+        }
+}
+
 // Function to initialize program.
 function init(){
 itemInput.addEventListener('input', charNumber)
@@ -299,12 +307,7 @@ itemList.addEventListener('click', onClickItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems)
 itemFilter.addEventListener('keydown', handleFilterEscape);
-// ESC tuşu global olarak edit modunda iptal için
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isEditMode) {
-            cancelFunc();
-        }
-    });
+document.addEventListener('keydown', globalEscapeKey)
 document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
 }
