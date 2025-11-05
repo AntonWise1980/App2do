@@ -70,7 +70,7 @@ if (newItem === '') {
     checkUI();
     // input clear
     itemInput.value='';
-
+    charNumber();
     updateClearButton();
 
 }
@@ -90,6 +90,7 @@ function addItemToDom(item){
     li.appendChild(button);
     itemList.appendChild(li);
     itemInput.focus();
+    
 }
 
 // Function return button with class name.
@@ -149,6 +150,7 @@ function onClickItem(e) {
     
     
   }
+  
 }
 
 // Function for check double item comparison.
@@ -229,6 +231,7 @@ function clearItems(){
     checkUI();
     itemInput.value='';
     updateClearButton();
+    charNumber();
     itemInput.focus();
 }
 
