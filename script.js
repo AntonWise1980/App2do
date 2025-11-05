@@ -192,12 +192,17 @@ function setItemToEdit(item){
 }
 
 function cancelFunc(){
+    isEditMode = false;
     itemInput.value = "";
-    itemList.querySelectorAll('li').forEach((i)=> i.classList.remove('edit-mode'))
-    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item'; // to change button icon and name
-    formBtn.style.backgroundColor = 'black';
+    itemList.querySelectorAll('li').forEach(i => {
+        i.classList.remove('edit-mode');
+        i.style.display = 'flex'; // show all.
+    });
+    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
+    formBtn.style.backgroundColor = '#333';
     cancelBtn.style.display = 'none';
-    
+    itemFilter.value = ''; // clear filter.
+    charNumber();
 }
 
 // Function remove item from DOM.
@@ -275,7 +280,7 @@ function checkUI (){
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
 function enterEscapeKey(e){
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter'&& !e.shiftKey) {
         e.preventDefault();
         itemForm.dispatchEvent(new Event('submit'));
     } else if (e.key === 'Escape' && isEditMode) {
