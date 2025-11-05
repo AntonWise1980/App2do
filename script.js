@@ -357,6 +357,7 @@ itemFilter.addEventListener('keydown', handleFilterEscape)
 document.addEventListener('keydown', globalEscapeKey)
 document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
+itemInput.focus();
 updateClearButton();
 }
 
