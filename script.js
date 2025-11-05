@@ -2,7 +2,6 @@
 This application is a "to do app" program. Some people may also refer to this program as a Shopping List. 
 While developing the program, I benefited from Bradley Traversy's tutorial. However, 
 I implemented a few missing functions and features that I noticed during development myself. 
-
 Anton Wise,
 2025
 */
