@@ -1,31 +1,6 @@
 # Grocery App
 This application is a "to do app" program. Some people may also refer to this program as a Shopping List. While developing the program, I benefited from Bradley Traversy's tutorial. However, 
-I implemented a few missing functions that I noticed during development myself.
-
-The features I added are as follows: 
-
-## Features
-- Add / Edit / Delete
-- Cancel button
-- Character limit + timer
-- Enter & Escape shortcuts
-- Filtering (real-time)
-- LocalStorage
-- Responsive
-
-1- In the original training, there was no cancel button for when you wanted to change an item on the to-do list.
-I added a cancel button, allowing you to return to the beginning by clicking the cancel button if you decide to back out.
-
-2- I wanted to limit the number of characters that can be entered in a field. This way, 
-in case a very long item is entered, I was able to alert the user using the alert function. 
-
-3- I added a new class named btn2 for the Cancel button in my CSS class. 
-
-4- In the HTML part, I added my button with the btn2 ID next to the same button so that it is inline. 
-This way, I can reach it from CSS and adjust its design. More importantly, by setting the Display property to "none" or "inline," 
-I can target this feature from the JS code and toggle it between active/inactive. 
-In VanillaJS, I reverted whatever I changed back to its original state.
-
+I implemented a few missing functions that I noticed during development myself. Simple. Fast. Offline. Built with pure JavaScript.
 Anton Wise,
 2025
 
@@ -34,13 +9,53 @@ https://antonapptodo.vercel.app/
 https://not2do.netlify.app/
 
 ## Features
-- Cancel button.
-- Filter list.
-- Control input value.
-- Local Storage.
-- Netlify online.
 
-![Logo](https://not2do.netlify.app/images/ss.png)
+| Feature | Description |
+|--------|-------------|
+| **Add / Edit / Delete** | Full CRUD functionality |
+| **Cancel Button (in Edit Mode)** | Back out of edits safely |
+| **15-Character Limit** | Prevents overly long entries |
+| **Live Character Counter** | Real-time feedback: `0 / 15` |
+| **Escape to Cancel** | Fast keyboard cancellation |
+| **Enter to Submit** | Quick item addition |
+| **Live Filtering** | Search list instantly |
+| **LocalStorage Persistence** | List survives page refresh |
+| **Case-Insensitive** | "Milk" = "milk" |
+| **Duplicate Prevention** | Can't add the same item twice |
+| **Visual Edit Mode** | Edited item turns gray, button turns green |
+| **Clear All** | Remove all items with one click |
+
+## Technologies
+
+- **HTML5**
+- **CSS3** (Flexbox, modern styling)
+- **Vanilla JavaScript** (ES6+)
+- **Font Awesome** (icons)
+- **LocalStorage** (persistent storage)
+
+## Setup
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/AntonWise1980/App2do
+
+2. Open index.html in your browser.
+
+No internet required — works 100% offline.
+
+## Usage
+
+| Action             | How to Do It                                                                 |
+|--------------------|------------------------------------------------------------------------------|
+| **Add Item**       | Type in the input field → Press `Enter` or click **Add Item**                |
+| **Edit Item**      | Click on any item in the list                                                |
+| **Update Item**    | Modify the text → Press `Enter` or click **Update Item**                     |
+| **Cancel Edit**    | Click **Cancel** button or press `Escape`                                    |
+| **Delete Item**    | Click the **×** icon next to the item                                        |
+| **Filter List**    | Type in the **Filter Items** box to search instantly                         |
+| **Clear All**      | Click **Clear All** button (visible only when list has items)                |
+| **Keyboard Tips**  | `Enter` = Submit • `Escape` = Cancel Edit • `Click` = Edit Item             |
+
 
 ## Lessons Learned
 I got some hands-on experience working with plain JavaScript. I learned how to revert any element back to its original state after changing it with Vanilla Script.
