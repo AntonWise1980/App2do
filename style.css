@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 *,
 *::before,
 *::after {
@@ -34,7 +33,6 @@ header h1 {
   color: red;
 }
 
-
 .container {
   max-width: 500px;
   margin: 0px auto;
@@ -45,7 +43,6 @@ header h1 {
 .edit-mode {
   color: #ccc;
 }
-
 
 /* Form & Input */
 .form-input {
@@ -160,6 +157,43 @@ div .btn2 {
     margin-top: 5px;
 }
 
+/* Input temizleme butonu (x ikonu) */
+.clear-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.clear-input-btn {
+  position: absolute;
+  right: 10px;
+  top: 38%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.clear-input-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Input doluysa veya edit modundaysa buton görünsün */
+.clear-input-wrapper.has-value .clear-input-btn,
+.clear-input-wrapper.edit-mode .clear-input-btn {
+  display: flex;
+}
 
 @media (max-width: 500px) {
   .items li {

@@ -15,6 +15,8 @@ const formBtn = itemForm.querySelector('button');
 const cancelBtn = document.getElementById('btn2');
 const charCount = document.getElementById('char-count');
 let isEditMode = false;
+let clearInputWrapper = null;
+let clearInputBtn = null;
 
 // Function display items after dom content loaded show list.
 function displayItems(){
@@ -67,7 +69,9 @@ if (newItem === '') {
     //checkui because hiding buttons depends on status ui.
     checkUI();
     // input clear
-    itemInput.value=''; 
+    itemInput.value='';
+
+    updateClearButton();
 
 }
 
@@ -85,6 +89,7 @@ function addItemToDom(item){
     // new I can add button to the li element.
     li.appendChild(button);
     itemList.appendChild(li);
+    itemInput.focus();
 }
 
 // Function return button with class name.
@@ -171,9 +176,10 @@ function setItemToEdit(item){
     
     cancelBtn.style.display = 'inline';
     
-    
+    updateClearButton();
 }
 
+// Function for Esc key to exit edit mode or give up write input.
 function cancelFunc(){
     isEditMode = false;
     itemInput.value = "";
@@ -185,7 +191,7 @@ function cancelFunc(){
     formBtn.style.backgroundColor = '#333';
     cancelBtn.style.display = 'none';
     itemFilter.value = ''; // clear filter.
-    charNumber();
+    updateClearButton();
 }
 
 // Function remove item from DOM.
@@ -196,6 +202,7 @@ function removeItem(item){
         
         // from DOM I am removing.    
         item.remove();
+        itemInput.value = "";
 
         // from storage removing.
         removeItemFromStorage(item.textContent);
@@ -220,6 +227,9 @@ function clearItems(){
     }
     localStorage.removeItem('items');
     checkUI();
+    itemInput.value='';
+    updateClearButton();
+    itemInput.focus();
 }
 
 // Function filter item list.
@@ -253,7 +263,7 @@ function handleFilterEscape(e) {
 
 // Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
-    itemInput.value = '';
+   
     cancelBtn.style.display = 'none';
     const items = itemList.querySelectorAll('li');
     if(items.length===0){
@@ -266,6 +276,7 @@ function checkUI (){
     formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>  Add Item';
     formBtn.style.backgroundColor = '#333';
     isEditMode = false;
+    updateClearButton();
 }
 
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
@@ -295,8 +306,46 @@ function globalEscapeKey(e){
         }
 }
 
+// Function adding Button for cleaning input-item area.
+function addInputClearButtonWithClass() {
+    clearInputWrapper = document.createElement('div');
+    clearInputWrapper.className = 'clear-input-wrapper';
+
+    clearInputBtn = document.createElement('button');
+    clearInputBtn.type = 'button';
+    clearInputBtn.className = 'clear-input-btn';
+    clearInputBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; // Font Awesome 6.1.2
+    clearInputBtn.setAttribute('aria-label', 'Clear input');
+
+    const parent = itemInput.parentNode;
+    parent.insertBefore(clearInputWrapper, itemInput);
+    clearInputWrapper.appendChild(itemInput);
+    clearInputWrapper.appendChild(clearInputBtn);
+
+    clearInputBtn.addEventListener('click', clearInputField);
+    itemInput.addEventListener('input', updateClearButton);
+}
+
+// Function cleaning input-item area if user give up type anything for mobile.
+function clearInputField() {
+    itemInput.value = '';
+    itemInput.focus();
+    charNumber();
+    if (isEditMode) cancelFunc();
+    updateClearButton();
+}
+
+// Function for update visibility of clear button.
+function updateClearButton() {
+    if (!clearInputWrapper) return;
+    const hasValue = itemInput.value.trim() !== '';
+    clearInputWrapper.classList.toggle('has-value', hasValue);
+    clearInputWrapper.classList.toggle('edit-mode', isEditMode);
+}
+
 // Function to initialize program.
 function init(){
+addInputClearButtonWithClass();
 itemInput.addEventListener('input', charNumber)
 itemInput.addEventListener('keydown', enterEscapeKey)
 itemForm.addEventListener('submit', onAddItemSubmit)
@@ -308,6 +357,7 @@ itemFilter.addEventListener('keydown', handleFilterEscape)
 document.addEventListener('keydown', globalEscapeKey)
 document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
+updateClearButton();
 }
 
 init();
