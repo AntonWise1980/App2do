@@ -247,9 +247,9 @@ function filterItems(e){
 // Function for If the user gives up while entering the item filter function and presses the Esc key, it clears the field and restores the list.
 function handleFilterEscape(e) {
     if (e.key === 'Escape') {
-        itemFilter.value = '';           // Input temizle
-        filterItems({ target: { value: '' } }); // Tüm listeyi göster
-        itemFilter.blur();               // Opsiyonel: Odak kaldır
+        itemFilter.value = '';           // Input clear.
+        filterItems({ target: { value: '' } }); // Show back all list.
+        itemFilter.blur();               // item filter blur 
     }
 }
 
@@ -288,9 +288,6 @@ function charNumber(){
     charCount.textContent = `${length} / 15`;
     charCount.style.color = length > 15 ? 'red' : '#666';
 }
-
-
-
 
 // Function to initialize program.
 function init(){
