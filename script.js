@@ -240,7 +240,7 @@ function filterItems(e){
     // itemList not in the global scope that is the reason again created.
     const items = itemList.querySelectorAll('li');
     // I am doing target value lowerACase and assing text variable.
-    const text = e.target.value.toLowerCase();
+    const text = e.target.value.trim().toLowerCase();
 
     items.forEach((item)=>{
         // each item value taking itemname variable with lowercase.
