@@ -270,8 +270,6 @@ function checkUI (){
     formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>  Add Item';
     formBtn.style.backgroundColor = '#333';
     isEditMode = false;
-    charNumber();
-
 }
 
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
