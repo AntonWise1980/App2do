@@ -299,6 +299,12 @@ itemList.addEventListener('click', onClickItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems)
 itemFilter.addEventListener('keydown', handleFilterEscape);
+// ESC tuşu global olarak edit modunda iptal için
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isEditMode) {
+            cancelFunc();
+        }
+    });
 document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
 }
