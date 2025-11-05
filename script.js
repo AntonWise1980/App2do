@@ -1,27 +1,10 @@
 /* 
-
 This application is a "to do app" program. Some people may also refer to this program as a Shopping List. 
 While developing the program, I benefited from Bradley Traversy's tutorial. However, 
-I implemented a few missing functions that I noticed during development myself. 
-
-The features I added are as follows:  
-
-1- In the original training, there was no cancel button for when you wanted to change an item on the to-do list.
-I added a cancel button, allowing you to return to the beginning by clicking the cancel button if you decide to back out.
-
-2- I wanted to limit the number of characters that can be entered in a field. This way, 
-in case a very long item is entered, I was able to alert the user using the alert function. 
-
-3- I added a new class named btn2 for the Cancel button in my CSS class. 
-
-4- In the HTML part, I added my button with the btn2 ID next to the same button so that it is inline. 
-This way, I can reach it from CSS and adjust its design. More importantly, by setting the Display property to "none" or "inline," 
-I can target this feature from the JS code and toggle it between active/inactive. 
-In VanillaJS, I reverted whatever I changed back to its original state.
+I implemented a few missing functions and features that I noticed during development myself. 
 
 Anton Wise,
 2025
-
 */
 
 const itemForm = document.getElementById('item-form');
