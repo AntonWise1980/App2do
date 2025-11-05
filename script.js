@@ -306,7 +306,7 @@ cancelBtn.addEventListener('click', cancelFunc)
 itemList.addEventListener('click', onClickItem)
 clearBtn.addEventListener('click', clearItems)
 itemFilter.addEventListener('input',filterItems)
-itemFilter.addEventListener('keydown', handleFilterEscape);
+itemFilter.addEventListener('keydown', handleFilterEscape)
 document.addEventListener('keydown', globalEscapeKey)
 document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
