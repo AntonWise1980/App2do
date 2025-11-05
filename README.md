@@ -5,8 +5,8 @@ Anton Wise,
 2025
 
 ## Demo
+https://antonwise1980.github.io/App2do/
 https://antonapptodo.vercel.app/
-https://not2do.netlify.app/
 
 ## Features
 
