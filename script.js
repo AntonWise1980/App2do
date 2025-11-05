@@ -261,6 +261,15 @@ function filterItems(e){
     });
 }
 
+// Function for If the user gives up while entering the item filter function and presses the Esc key, it clears the field and restores the list.
+function handleFilterEscape(e) {
+    if (e.key === 'Escape') {
+        itemFilter.value = '';           // Input temizle
+        filterItems({ target: { value: '' } }); // Tüm listeyi göster
+        itemFilter.blur();               // Opsiyonel: Odak kaldır
+    }
+}
+
 // Function for checkUI because of hiding clear button and filter input.
 function checkUI (){
     itemInput.value = '';
@@ -297,6 +306,9 @@ function charNumber(){
     charCount.style.color = length > 15 ? 'red' : '#666';
 }
 
+
+
+
 // Function to initialize program.
 function init(){
 itemInput.addEventListener('input', charNumber)
@@ -305,7 +317,8 @@ itemForm.addEventListener('submit', onAddItemSubmit)
 cancelBtn.addEventListener('click', cancelFunc)
 itemList.addEventListener('click', onClickItem)
 clearBtn.addEventListener('click', clearItems)
-itemFilter.addEventListener('input',filterItems )
+itemFilter.addEventListener('input',filterItems)
+itemFilter.addEventListener('keydown', handleFilterEscape);
 document.addEventListener('DOMContentLoaded', displayItems)
 checkUI();
 }
