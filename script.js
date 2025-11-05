@@ -164,9 +164,10 @@ function onClickItem(e) {
 }
 
 // Function for check double item comparison.
-function checkIfItemExists(item){
-   return getItemFromStorage().includes(item);
-    
+function checkIfItemExists(newItem) {
+    return getItemFromStorage().some(stored => 
+        stored.toLowerCase() === newItem.toLowerCase()// to check capital and lowercase.
+    );
 }
 
 // Function for edit item.
