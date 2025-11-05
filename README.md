@@ -56,6 +56,13 @@ No internet required — works 100% offline.
 | **Clear All**      | Click **Clear All** button (visible only when list has items)                |
 | **Keyboard Tips**  | `Enter` = Submit • `Escape` = Cancel Edit • `Click` = Edit Item             |
 
+## License
+
+This project is licensed under the **[MIT License](LICENSE)** - see the [LICENSE](LICENSE) file for details.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+
 
 ## Lessons Learned
 I got some hands-on experience working with plain JavaScript. I learned how to revert any element back to its original state after changing it with Vanilla Script.
