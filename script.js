@@ -152,7 +152,7 @@ function onClickItem(e) {
     
   }
   
-  
+  updateFilterClearButton();
 }
 
 // Function for check double item comparison.
