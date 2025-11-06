@@ -6,14 +6,14 @@ Anton Wise,
 2025
 */
 
-const itemForm = document.getElementById('item-form');
-const itemInput = document.getElementById('item-input');
-const itemList = document.getElementById('item-list');
-const clearBtn = document.getElementById('clear');
-const itemFilter = document.getElementById('filter');
-const formBtn = itemForm.querySelector('button');
-const cancelBtn = document.getElementById('btn2');
-const charCount = document.getElementById('char-count');
+const ITEM_FORM = document.getElementById('item-form');
+const ITEM_INPUT = document.getElementById('item-input');
+const ITEM_LIST = document.getElementById('item-list');
+const CLEAR_BTN_ALL = document.getElementById('clear');
+const ITEM_FILTER_INPUT = document.getElementById('filter');
+const FORM_BUTTON_ADD_ITEM = ITEM_FORM.querySelector('button');
+const CANCEL_BUTTON_FOR_EDIT = document.getElementById('btn2');
+const CHARACTER_COUNT_SHOW_LIMIT = document.getElementById('char-count');
 let isEditMode = false;
 let clearInputWrapper = null;
 let clearInputBtn = null;
@@ -22,19 +22,19 @@ let clearInputBtn = null;
 function displayItems(){
     const itemsFromStorage = getItemFromStorage();
     itemsFromStorage.forEach(item=>addItemToDom(item));
-    checkUI();
-    itemFilter.value = ''; // show all list.
+    updateUI();
+    ITEM_FILTER_INPUT.value = ''; // show all list.
 }
 
 // Function for addItem.
 function onAddItemSubmit (e){
     e.preventDefault(); // because not using yet local storage.
     // get the new item from item input value.
-    const newItem = itemInput.value.trim(); // "   " for prevend many spaces..
+    const newItem = ITEM_INPUT.value.trim(); // "   " for prevend many spaces..
     //simple validate input value
 if (newItem === '') {
     alert('Please input and item!');
-    itemInput.focus();
+    ITEM_INPUT.focus();
     return;
 }
     if(newItem.length>15){
@@ -44,7 +44,7 @@ if (newItem === '') {
 
     // If check for edit mode.
     if (isEditMode){
-    const itemToEdit = itemList.querySelector('.edit-mode');
+    const itemToEdit = ITEM_LIST.querySelector('.edit-mode');
 
     removeItemFromStorage(itemToEdit.textContent);
     itemToEdit.classList.remove('edit-mode');
@@ -52,7 +52,7 @@ if (newItem === '') {
     
     isEditMode = false;
     // reset filter to show all elements.
-    itemFilter.value = '';
+    ITEM_FILTER_INPUT.value = '';
     filterItems({ target: { value: '' } });
 
     } else {
@@ -66,10 +66,10 @@ if (newItem === '') {
 
     // call function add item to DOM.
     addItemToStorage(newItem);
-    //checkui because hiding buttons depends on status ui.
-    checkUI();
+    //updateUI because hiding buttons depends on status ui.
+    updateUI();
     // input clear
-    itemInput.value='';
+    ITEM_INPUT.value='';
     charNumber();
     updateClearButton();
 
@@ -88,8 +88,8 @@ function addItemToDom(item){
     button.appendChild(icon)
     // new I can add button to the li element.
     li.appendChild(button);
-    itemList.appendChild(li);
-    itemInput.focus();
+    ITEM_LIST.appendChild(li);
+    ITEM_INPUT.focus();
     
 }
 
@@ -138,7 +138,7 @@ function getItemFromStorage(){
 // Function for click items event handler.
 function onClickItem(e) {
     //when user choose item input of filter item should clear.
-    itemFilter.value = "";
+    ITEM_FILTER_INPUT.value = "";
     
 
     if (e.target.parentElement.classList.contains('remove-item')) {
@@ -167,18 +167,18 @@ function setItemToEdit(item){
     isEditMode = true;
     
     // get only visible li tags
-    itemList.querySelectorAll('li').forEach(li => {
+    ITEM_LIST.querySelectorAll('li').forEach(li => {
         if (li.style.display !== 'none') {
             li.classList.remove('edit-mode');
         }
     });
 
     item.classList.add('edit-mode'); // to change color gray
-    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Item'; // to change button icon and name
-    formBtn.style.backgroundColor = 'green';
-    itemInput.value = item.textContent; //take item to input.value.
+    FORM_BUTTON_ADD_ITEM.innerHTML = '<i class="fa-solid fa-pen"></i> Update Item'; // to change button icon and name
+    FORM_BUTTON_ADD_ITEM.style.backgroundColor = 'green';
+    ITEM_INPUT.value = item.textContent; //take item to input.value.
     
-    cancelBtn.style.display = 'inline';
+    CANCEL_BUTTON_FOR_EDIT.style.display = 'inline';
     
     updateClearButton();
 }
@@ -186,15 +186,15 @@ function setItemToEdit(item){
 // Function for Esc key to exit edit mode or give up write input.
 function cancelFunc(){
     isEditMode = false;
-    itemInput.value = "";
-    itemList.querySelectorAll('li').forEach(i => {
+    ITEM_INPUT.value = "";
+    ITEM_LIST.querySelectorAll('li').forEach(i => {
         i.classList.remove('edit-mode');
         i.style.display = 'flex'; // show all.
     });
-    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
-    formBtn.style.backgroundColor = '#333';
-    cancelBtn.style.display = 'none';
-    itemFilter.value = ''; // clear filter.
+    FORM_BUTTON_ADD_ITEM.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
+    FORM_BUTTON_ADD_ITEM.style.backgroundColor = '#333';
+    CANCEL_BUTTON_FOR_EDIT.style.display = 'none';
+    ITEM_FILTER_INPUT.value = ''; // clear filter.
     updateClearButton();
 }
 
@@ -206,11 +206,11 @@ function removeItem(item){
         
         // from DOM I am removing.    
         item.remove();
-        itemInput.value = "";
+        ITEM_INPUT.value = "";
 
         // from storage removing.
         removeItemFromStorage(item.textContent);
-            checkUI();
+            updateUI();
         }  
 }
 
@@ -226,21 +226,21 @@ function removeItemFromStorage(item){
 
 // Function remove all items from the list.
 function clearItems(){
-    while(itemList.firstChild){
-        itemList.removeChild(itemList.firstChild);
+    while(ITEM_LIST.firstChild){
+        ITEM_LIST.removeChild(ITEM_LIST.firstChild);
     }
     localStorage.removeItem('items');
-    checkUI();
-    itemInput.value='';
+    updateUI();
+    ITEM_INPUT.value='';
     updateClearButton();
     charNumber();
-    itemInput.focus();
+    ITEM_INPUT.focus();
 }
 
 // Function filter item list.
 function filterItems(e){
-    // itemList not in the global scope that is the reason again created.
-    const items = itemList.querySelectorAll('li');
+    // ITEM_LIST not in the global scope that is the reason again created.
+    const items = ITEM_LIST.querySelectorAll('li');
     // I am doing target value lowerACase and assing text variable.
     const text = e.target.value.trim().toLowerCase();
 
@@ -260,26 +260,26 @@ function filterItems(e){
 // Function for If the user gives up while entering the item filter function and presses the Esc key, it clears the field and restores the list.
 function handleFilterEscape(e) {
     if (e.key === 'Escape') {
-        itemFilter.value = '';           // Input clear.
+        ITEM_FILTER_INPUT.value = '';           // Input clear.
         filterItems({ target: { value: '' } }); // Show back all list.
-        itemFilter.blur();               // item filter blur 
+        ITEM_FILTER_INPUT.blur();               // item filter blur 
     }
 }
 
-// Function for checkUI because of hiding clear button and filter input.
-function checkUI (){
+// Function for updateUI because of hiding clear button and filter input.
+function updateUI (){
    
-    cancelBtn.style.display = 'none';
-    const items = itemList.querySelectorAll('li');
+    CANCEL_BUTTON_FOR_EDIT.style.display = 'none';
+    const items = ITEM_LIST.querySelectorAll('li');
     if(items.length===0){
-        clearBtn.style.display = "none";
-        itemFilter.style.display = "none";
+        CLEAR_BTN_ALL.style.display = "none";
+        ITEM_FILTER_INPUT.style.display = "none";
     } else {
-        clearBtn.style.display='block';
-        itemFilter.style.display='block';
+        CLEAR_BTN_ALL.style.display='block';
+        ITEM_FILTER_INPUT.style.display='block';
     }
-    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>  Add Item';
-    formBtn.style.backgroundColor = '#333';
+    FORM_BUTTON_ADD_ITEM.innerHTML = '<i class="fa-solid fa-plus"></i>  Add Item';
+    FORM_BUTTON_ADD_ITEM.style.backgroundColor = '#333';
     isEditMode = false;
     updateClearButton();
 }
@@ -290,7 +290,7 @@ function enterEscapeKey(e){
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         
-        itemForm.dispatchEvent(new Event('submit'));
+        ITEM_FORM.dispatchEvent(new Event('submit'));
     } else if (e.key === 'Escape') {
         cancelFunc();
         
@@ -300,9 +300,9 @@ function enterEscapeKey(e){
 // Function that allows the user to specify the maximum number of characters to enter when entering an item.
 function charNumber(){
     
-    const length = itemInput.value.length;
-    charCount.textContent = `${length} / 15`;
-    charCount.style.color = length > 15 ? 'red' : '#666';
+    const length = ITEM_INPUT.value.length;
+    CHARACTER_COUNT_SHOW_LIMIT.textContent = `${length} / 15`;
+    CHARACTER_COUNT_SHOW_LIMIT.style.color = length > 15 ? 'red' : '#666';
 }
 
 // Function allows to cancel with Esc key while edit-mode is on.
@@ -324,19 +324,19 @@ function addInputClearButtonWithClass() {
     clearInputBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; // Font Awesome 6.1.2
     clearInputBtn.setAttribute('aria-label', 'Clear input');
 
-    const parent = itemInput.parentNode;
-    parent.insertBefore(clearInputWrapper, itemInput);
-    clearInputWrapper.appendChild(itemInput);
+    const parent = ITEM_INPUT.parentNode;
+    parent.insertBefore(clearInputWrapper, ITEM_INPUT);
+    clearInputWrapper.appendChild(ITEM_INPUT);
     clearInputWrapper.appendChild(clearInputBtn);
 
     clearInputBtn.addEventListener('click', clearInputField);
-    itemInput.addEventListener('input', updateClearButton);
+    ITEM_INPUT.addEventListener('input', updateClearButton);
 }
 
 // Function cleaning input-item area if user give up type anything for mobile.
 function clearInputField() {
-    itemInput.value = '';
-    itemInput.focus();
+    ITEM_INPUT.value = '';
+    ITEM_INPUT.focus();
     charNumber();
     if (isEditMode) cancelFunc();
     updateClearButton();
@@ -345,7 +345,7 @@ function clearInputField() {
 // Function for update visibility of clear button.
 function updateClearButton() {
     if (!clearInputWrapper) return;
-    const hasValue = itemInput.value.trim() !== '';
+    const hasValue = ITEM_INPUT.value.trim() !== '';
     clearInputWrapper.classList.toggle('has-value', hasValue);
     clearInputWrapper.classList.toggle('edit-mode', isEditMode);
 }
@@ -353,18 +353,18 @@ function updateClearButton() {
 // Function to initialize program.
 function init(){
 addInputClearButtonWithClass(); // When user start to write show x button icon.
-itemInput.addEventListener('input', charNumber) // when user start to write item show character number.
-itemInput.addEventListener('keydown', enterEscapeKey) // when user after writing if push the Escape key.
-itemForm.addEventListener('submit', onAddItemSubmit) // when user submit form by clicking Add Item button.
-cancelBtn.addEventListener('click', cancelFunc) // when user choose any item to edit show button cancel to give up.
-itemList.addEventListener('click', onClickItem) // when user choose any item from the list to edit it or delete it.
-clearBtn.addEventListener('click', clearItems) // when user click Clear All Items button.
-itemFilter.addEventListener('input',filterItems) // when user search item in filter area bring them.
-itemFilter.addEventListener('keydown', handleFilterEscape) // when user start to search then give up and push Esc key. reset list.
+ITEM_INPUT.addEventListener('input', charNumber) // when user start to write item show character number.
+ITEM_INPUT.addEventListener('keydown', enterEscapeKey) // when user after writing if push the Escape key.
+ITEM_FORM.addEventListener('submit', onAddItemSubmit) // when user submit form by clicking Add Item button.
+CANCEL_BUTTON_FOR_EDIT.addEventListener('click', cancelFunc) // when user choose any item to edit show button cancel to give up.
+ITEM_LIST.addEventListener('click', onClickItem) // when user choose any item from the list to edit it or delete it.
+CLEAR_BTN_ALL.addEventListener('click', clearItems) // when user click Clear All Items button.
+ITEM_FILTER_INPUT.addEventListener('input',filterItems) // when user search item in filter area bring them.
+ITEM_FILTER_INPUT.addEventListener('keydown', handleFilterEscape) // when user start to search then give up and push Esc key. reset list.
 document.addEventListener('keydown', globalEscapeKey) // when the edit-mode on, user give up change anything push Esc key.
 document.addEventListener('DOMContentLoaded', displayItems) // When the all page loaded display items.
-checkUI();
-itemInput.focus();
+updateUI();
+ITEM_INPUT.focus();
 updateClearButton();
 }
 
