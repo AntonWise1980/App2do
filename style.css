@@ -197,11 +197,50 @@ div .btn2 {
   color: #333;
 }
 
-/* Input doluysa veya edit modundaysa buton görünsün */
+/* Input full or edit mode made button visible */
 .clear-input-wrapper.has-value .clear-input-btn,
 .clear-input-wrapper.edit-mode .clear-input-btn {
   display: flex;
 }
+
+/* Filter input için clear (x) butonu */
+.clear-filter-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.clear-filter-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.clear-filter-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Filter doluysa x butonu görünsün */
+.clear-filter-wrapper.has-value .clear-filter-btn {
+  display: flex;
+}
+
 
 @media (max-width: 500px) {
   .items li {

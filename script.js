@@ -258,6 +258,7 @@ function filterItems(e){
         }
     
     });
+    updateFilterClearButton();
 }
 
 // Function for If the user gives up while entering the item filter function and presses the Esc key, it clears the field and restores the list.
@@ -266,6 +267,7 @@ function handleFilterEscape(e) {
         ITEM_FILTER_INPUT.value = '';           // Input clear.
         filterItems({ target: { value: '' } }); // Show back all list.
         ITEM_FILTER_INPUT.blur();               // item filter blur 
+        updateFilterClearButton();
     }
 }
 
@@ -353,6 +355,43 @@ function updateClearButton() {
     clearInputWrapper.classList.toggle('edit-mode', isEditMode);
 }
 
+// Filter input adding (x) button function
+function addFilterClearButtonWithClass() {
+    const filterWrapper = document.createElement('div');
+    filterWrapper.className = 'clear-filter-wrapper';
+
+    const clearFilterBtn = document.createElement('button');
+    clearFilterBtn.type = 'button';
+    clearFilterBtn.className = 'clear-filter-btn';
+    clearFilterBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    clearFilterBtn.setAttribute('aria-label', 'Clear filter');
+
+    const parent = ITEM_FILTER_INPUT.parentNode;
+    parent.insertBefore(filterWrapper, ITEM_FILTER_INPUT);
+    filterWrapper.appendChild(ITEM_FILTER_INPUT);
+    filterWrapper.appendChild(clearFilterBtn);
+
+    clearFilterBtn.addEventListener('click', function () {
+        ITEM_FILTER_INPUT.value = '';
+        filterItems({ target: { value: '' } });
+        ITEM_FILTER_INPUT.focus();
+        updateFilterClearButton();
+    });
+
+    ITEM_FILTER_INPUT.addEventListener('input', updateFilterClearButton);
+
+    // İlk yüklemede buton görünürlüğünü ayarla
+    updateFilterClearButton();
+}
+
+// Functin is update visibilty of button clear
+function updateFilterClearButton() {
+    const wrapper = ITEM_FILTER_INPUT.parentElement;
+    if (!wrapper || !wrapper.classList.contains('clear-filter-wrapper')) return;
+    const hasValue = ITEM_FILTER_INPUT.value.trim() !== '';
+    wrapper.classList.toggle('has-value', hasValue);
+}
+
 // Function to initialize program.
 function init(){
 addInputClearButtonWithClass(); // When user start to write show x button icon.
@@ -369,6 +408,7 @@ document.addEventListener('DOMContentLoaded', displayItems) // When the all page
 updateUI();
 ITEM_INPUT.focus();
 updateClearButton();
+addFilterClearButtonWithClass();
 }
 
 init();
