@@ -1,4 +1,4 @@
-# Grocery App
+# Todo App
 This application is a "to do app" program. Some people may also refer to this program as a Shopping List. While developing the program, I benefited from Bradley Traversy's tutorial. However, 
 I implemented a few missing functions that I noticed during development myself. Simple. Fast. Offline. Built with pure JavaScript.
 Anton Wise,
@@ -6,7 +6,9 @@ Anton Wise,
 
 ## Demo
 https://antonwise1980.github.io/App2do/
-https://antonapptodo.vercel.app/
+
+# Documentation
+[![To-Do App Documentation](https://img.shields.io/badge/Docs-ToDo_App_User_Guide-blue?style=for-the-badge&logo=github)](https://antonwise.github.io/todo-app/)
 
 ## Features
 
