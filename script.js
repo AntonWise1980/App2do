@@ -27,7 +27,7 @@ function displayItems(){
 }
 
 // Function for addItem.
-function onAddItemSubmit (e){
+function onSubmitFormAddItem (e){
     e.preventDefault(); // because not using yet local storage.
     // get the new item from item input value.
     const newItem = ITEM_INPUT.value.trim(); // "   " for prevend many spaces..
@@ -70,7 +70,7 @@ if (newItem === '') {
     updateUI();
     // input clear
     ITEM_INPUT.value='';
-    charNumber();
+    updateCharCount();
     updateClearButton();
 
 }
@@ -233,7 +233,7 @@ function clearItems(){
     updateUI();
     ITEM_INPUT.value='';
     updateClearButton();
-    charNumber();
+    updateCharCount();
     ITEM_INPUT.focus();
 }
 
@@ -285,7 +285,7 @@ function updateUI (){
 }
 
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
-function enterEscapeKey(e){
+function handIeInputEscKeydown(e){
 
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -298,7 +298,7 @@ function enterEscapeKey(e){
 }
 
 // Function that allows the user to specify the maximum number of characters to enter when entering an item.
-function charNumber(){
+function updateCharCount(){
     
     const length = ITEM_INPUT.value.length;
     CHARACTER_COUNT_SHOW_LIMIT.textContent = `${length} / 15`;
@@ -337,7 +337,7 @@ function addInputClearButtonWithClass() {
 function clearInputField() {
     ITEM_INPUT.value = '';
     ITEM_INPUT.focus();
-    charNumber();
+    updateCharCount();
     if (isEditMode) cancelFunc();
     updateClearButton();
 }
@@ -353,9 +353,9 @@ function updateClearButton() {
 // Function to initialize program.
 function init(){
 addInputClearButtonWithClass(); // When user start to write show x button icon.
-ITEM_INPUT.addEventListener('input', charNumber) // when user start to write item show character number.
-ITEM_INPUT.addEventListener('keydown', enterEscapeKey) // when user after writing if push the Escape key.
-ITEM_FORM.addEventListener('submit', onAddItemSubmit) // when user submit form by clicking Add Item button.
+ITEM_INPUT.addEventListener('input', updateCharCount) // when user start to write item show character number.
+ITEM_INPUT.addEventListener('keydown', handIeInputEscKeydown) // when user after writing if push the Escape key.
+ITEM_FORM.addEventListener('submit', onSubmitFormAddItem) // when user submit form by clicking Add Item button.
 CANCEL_BUTTON_FOR_EDIT.addEventListener('click', cancelFunc) // when user choose any item to edit show button cancel to give up.
 ITEM_LIST.addEventListener('click', onClickItem) // when user choose any item from the list to edit it or delete it.
 CLEAR_BTN_ALL.addEventListener('click', clearItems) // when user click Clear All Items button.
