@@ -353,17 +353,6 @@ function updateClearButton() {
     clearInputWrapper.classList.toggle('edit-mode', isEditMode);
 }
 
-function filterItemsCancelIconShow(){
-    
-
-    console.log("test");
-
-
-
-
-}
-
-
 // Function to initialize program.
 function init(){
 addInputClearButtonWithClass(); // When user start to write show x button icon.
@@ -373,9 +362,6 @@ ITEM_FORM.addEventListener('submit', onSubmitFormAddItem) // when user submit fo
 CANCEL_BUTTON_FOR_EDIT.addEventListener('click', cancelFunc) // when user choose any item to edit show button cancel to give up.
 ITEM_LIST.addEventListener('click', onClickItem) // when user choose any item from the list to edit it or delete it.
 CLEAR_BTN_ALL.addEventListener('click', clearItemsAll) // when user click Clear All Items button.
-
-ITEM_FILTER_INPUT.addEventListener('input', filterItemsCancelIconShow)
-
 ITEM_FILTER_INPUT.addEventListener('input',filterItems) // when user search item in filter area bring them.
 ITEM_FILTER_INPUT.addEventListener('keydown', handleFilterEscape) // when user start to search then give up and push Esc key. reset list.
 document.addEventListener('keydown', globalEscapeKey) // when the edit-mode on, user give up change anything push Esc key.
