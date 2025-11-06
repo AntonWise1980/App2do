@@ -137,8 +137,9 @@ function getItemFromStorage(){
 
 // Function for click items event handler.
 function onClickItem(e) {
-    //when we choose item input of filter item should clear.
+    //when user choose item input of filter item should clear.
     itemFilter.value = "";
+    
 
     if (e.target.parentElement.classList.contains('remove-item')) {
     removeItem(e.target.parentElement.parentElement);
@@ -150,6 +151,7 @@ function onClickItem(e) {
     
     
   }
+  
   
 }
 
@@ -285,11 +287,13 @@ function checkUI (){
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
 function enterEscapeKey(e){
 
-    if (e.key === 'Enter'&& !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
+        
         itemForm.dispatchEvent(new Event('submit'));
-    } else if (e.key === 'Escape' && isEditMode) {
+    } else if (e.key === 'Escape') {
         cancelFunc();
+        
     }
 }
 
@@ -348,17 +352,17 @@ function updateClearButton() {
 
 // Function to initialize program.
 function init(){
-addInputClearButtonWithClass();
-itemInput.addEventListener('input', charNumber)
-itemInput.addEventListener('keydown', enterEscapeKey)
-itemForm.addEventListener('submit', onAddItemSubmit)
-cancelBtn.addEventListener('click', cancelFunc)
-itemList.addEventListener('click', onClickItem)
-clearBtn.addEventListener('click', clearItems)
-itemFilter.addEventListener('input',filterItems)
-itemFilter.addEventListener('keydown', handleFilterEscape)
-document.addEventListener('keydown', globalEscapeKey)
-document.addEventListener('DOMContentLoaded', displayItems)
+addInputClearButtonWithClass(); // When user start to write show x button icon.
+itemInput.addEventListener('input', charNumber) // when user start to write item show character number.
+itemInput.addEventListener('keydown', enterEscapeKey) // when user after writing if push the Escape key.
+itemForm.addEventListener('submit', onAddItemSubmit) // when user submit form by clicking Add Item button.
+cancelBtn.addEventListener('click', cancelFunc) // when user choose any item to edit show button cancel to give up.
+itemList.addEventListener('click', onClickItem) // when user choose any item from the list to edit it or delete it.
+clearBtn.addEventListener('click', clearItems) // when user click Clear All Items button.
+itemFilter.addEventListener('input',filterItems) // when user search item in filter area bring them.
+itemFilter.addEventListener('keydown', handleFilterEscape) // when user start to search then give up and push Esc key. reset list.
+document.addEventListener('keydown', globalEscapeKey) // when the edit-mode on, user give up change anything push Esc key.
+document.addEventListener('DOMContentLoaded', displayItems) // When the all page loaded display items.
 checkUI();
 itemInput.focus();
 updateClearButton();
