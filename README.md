@@ -29,13 +29,6 @@ Anton Wise,
 | **Visual Edit Mode** | Edited item turns gray, button turns green |
 | **Clear All** | Remove all items with one click |
 
-### 📂 Klasör Yapısı
-/App2do
-├── index.html       ← Ana uygulama
-├── docs/
-│   └── index.html   ← Kullanıcı kılavuzu
-└── README.md
-
 ## Technologies
 
 - **HTML5**
