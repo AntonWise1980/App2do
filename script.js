@@ -17,6 +17,7 @@ const CHARACTER_COUNT_SHOW_LIMIT = document.getElementById('char-count');
 let isEditMode = false;
 let clearInputWrapper = null;
 let clearInputBtn = null;
+let draggedItem = null;
 
 // Function display items after dom content loaded show list.
 function displayItems(){
@@ -24,6 +25,7 @@ function displayItems(){
     itemsFromStorage.forEach(item=>addItemToDom(item));
     updateUI();
     ITEM_FILTER_INPUT.value = ''; // show all list.
+    enableDragAndDrop();
 }
 
 // Function for addItem.
@@ -103,6 +105,7 @@ function addItemToDom(item){
     // new I can add button to the li element.
     li.appendChild(button);
     ITEM_LIST.appendChild(li);
+    enableDragAndDrop();
     ITEM_INPUT.focus();
     
 }
@@ -225,6 +228,7 @@ function removeItem(item){
         // from storage removing.
         removeItemFromStorage(item.textContent);
             updateUI();
+            enableDragAndDrop();
         }  
 }
 
@@ -248,6 +252,7 @@ function clearItemsAll(){
     }
     localStorage.removeItem('items');
     updateUI();
+    enableDragAndDrop();
     ITEM_INPUT.value='';
     updateClearButton();
     updateCharCount();
@@ -273,6 +278,7 @@ function filterItems(e){
     
     });
     updateFilterClearButton();
+    enableDragAndDrop();
 }
 
 // Function for If the user gives up while entering the item filter function and presses the Esc key, it clears the field and restores the list.
@@ -429,7 +435,63 @@ updateUI();
 ITEM_INPUT.focus();
 updateClearButton();
 addFilterClearButtonWithClass();
+setTimeout(enableDragAndDrop, 100);
 }
 
+/* drag and drop settings*/
+
+// start drag
+function onDragStart(e) {
+    draggedItem = this;
+    setTimeout(() => this.classList.add('dragging'), 0);
+}
+
+// drag done
+function onDragEnd() {
+    this.classList.remove('dragging');
+    draggedItem = null;
+}
+
+// allow hover on
+function onDragOver(e) {
+    e.preventDefault();
+}
+
+// dropping
+function onDrop(e) {
+    e.preventDefault();
+    if (!draggedItem || draggedItem === this) return;
+
+    const allItems = Array.from(ITEM_LIST.children);
+    const fromIndex = allItems.indexOf(draggedItem);
+    const toIndex = allItems.indexOf(this);
+
+    if (fromIndex < toIndex) {
+        this.after(draggedItem);
+    } else {
+        this.before(draggedItem);
+    }
+
+    // save the order
+    saveOrderToStorage();
+}
+
+// save the order to the local storage
+function saveOrderToStorage() {
+    const items = Array.from(ITEM_LIST.children).map(li => li.firstChild.textContent);
+    localStorage.setItem('items', JSON.stringify(items));
+}
+
+// add all items drag listener
+function enableDragAndDrop() {
+    const items = ITEM_LIST.querySelectorAll('li');
+    items.forEach(item => {
+        item.draggable = true;
+        item.addEventListener('dragstart', onDragStart);
+        item.addEventListener('dragend', onDragEnd);
+        item.addEventListener('dragover', onDragOver);
+        item.addEventListener('drop', onDrop);
+    });
+}
 init();
 

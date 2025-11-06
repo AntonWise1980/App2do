@@ -236,11 +236,27 @@ div .btn2 {
   color: #333;
 }
 
-/* Filter doluysa x butonu görünsün */
+/* Filter full x button visibly */
 .clear-filter-wrapper.has-value .clear-filter-btn {
   display: flex;
 }
 
+/* For drag and drop styles*/
+#item-list li {
+    cursor: grab;
+    transition: 0.2s;
+}
+
+#item-list li:active {
+    cursor: grabbing;
+}
+
+#item-list li.dragging {
+    opacity: 0.5;
+    background: #f0f0f0;
+    transform: rotate(2deg);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
 
 @media (max-width: 500px) {
   .items li {
