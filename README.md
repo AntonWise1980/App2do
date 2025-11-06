@@ -8,7 +8,7 @@ Anton Wise,
 https://antonwise1980.github.io/App2do/
 
 # Documentation
-[![To-Do App Documentation](https://img.shields.io/badge/Docs-ToDo_App_User_Guide-blue?style=for-the-badge&logo=github)](https://antonwise.github.io/todo-app/)
+[![To-Do App Documentation](https://img.shields.io/badge/Docs-ToDo_App_User_Guide-blue?style=for-the-badge&logo=github)](https://antonwise.github.io/App2do/docs/index.html)
 
 ## Features
 
