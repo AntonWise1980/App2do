@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App - User Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #333;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #555);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.6em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50px;
+            margin-left: 0.5rem;
+        }
+
+        .badge-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        nav {
+            background-color: var(--light);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--success);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: #444;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .tip {
+             background-color: #e3f2fd;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid var(--warning);
+            color: #856404;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        code {
+            background-color: #f1f1f1;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .keyboard {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>To-Do App <span class="badge badge-success">v1.0.0</span></h1>
+            <p>User Guide & Documentation</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#scenarios">User Scenarios</a></li>
+                <li><a href="#shortcuts">Keyboard Shortcuts</a></li>
+                <li><a href="#errors">Error Messages</a></li>
+                <li><a href="#technical">Technical Details</a></li>
+                <li><a href="#developer">Developer Notes</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="overview">
+                <h2>1. Overview</h2>
+                <p>This is a simple and effective <strong>To-Do List</strong> or <strong>Shopping List</strong> application. Users can add, edit, delete, filter items, and persist data using <code>localStorage</code>.</p>
+                
+                <div class="tip">
+                    <strong>Note:</strong> The app is inspired by Brad Traversy's tutorial, with additional features (cancel button, character limit, clear input button, global Escape, etc.) implemented by the developer.
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>2. Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-plus"></i></div>
+                        <h3>Add Item</h3>
+                        <p>Add new items via button or Enter key</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-pen"></i></div>
+                        <h3>Edit</h3>
+                        <p>Update existing items</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-trash"></i></div>
+                        <h3>Delete</h3>
+                        <p>Remove single or all items</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h3>Filter</h3>
+                        <p>Search items (case-insensitive)</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-floppy-disk"></i></div>
+                        <h3>Persistence</h3>
+                        <p>Data saved in <code>localStorage</code></p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-keyboard"></i></div>
+                        <h3>Keyboard Support</h3>
+                        <p>Enter, Escape, global shortcuts</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="scenarios">
+                <h2>3. User Scenarios (Usage Flows)</h2>
+
+                <h3>3.1 App Launch</h3>
+                <ul>
+                    <li>All saved items are loaded into the list.</li>
+                    <li>If the list is empty:
+                        <ul>
+                            <li>"Clear All" button is hidden.</li>
+                            <li>Filter input is hidden.</li>
+                        </ul>
+                    </li>
+                    <li>Focus is automatically set to the input field.</li>
+                </ul>
+
+                <h3>3.2 Add New Item</h3>
+                <ol>
+                    <li>Type text into the <strong>input field</strong> (e.g., <code>Milk</code>).</li>
+                    <li>Click <strong>"Add Item"</strong> or press <kbd>Enter</kbd>.</li>
+                    <li><strong>Result:</strong>
+                        <ul>
+                            <li>Item is added to the list.</li>
+                            <li>Input is cleared.</li>
+                            <li>Focus remains in the input.</li>
+                            <li>"Clear All" and filter field become visible.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="warning">
+                    <strong>Warning:</strong> Duplicate items are blocked. Items longer than 15 characters are not allowed.
+                </div>
+
+                <h3>3.3 Edit Item</h3>
+                <ol>
+                    <li><strong>Click</strong> on an item in the list.</li>
+                    <li><strong>Result:</strong>
+                        <ul>
+                            <li>Item is highlighted in gray.</li>
+                            <li>Button changes to <strong>"Update Item"</strong> and turns green.</li>
+                            <li>Item text appears in the input field.</li>
+                            <li><strong>"Cancel"</strong> button appears.</li>
+                        </ul>
+                    </li>
+                    <li>Edit the text and click <strong>"Update Item"</strong> or press <kbd>Enter</kbd>.</li>
+                    <li><strong>Result:</strong> Item is updated, edit mode closes.</li>
+                </ol>
+
+                <h3>3.4 Cancel Edit</h3>
+                <p>Click <strong>"Cancel"</strong> or press <kbd>Escape</kbd> anywhere.</p>
+                <div class="tip">
+                    <strong>Result:</strong> Input is cleared, edit mode is canceled.
+                </div>
+
+                <h3>3.5 Delete Item</h3>
+                <ol>
+                    <li>Click the <strong>red X</strong> icon next to the item.</li>
+                    <li>Confirm with <strong>"OK"</strong> in the dialog.</li>
+                    <li><strong>Result:</strong> Item is removed from list and storage.</li>
+                </ol>
+
+                <h3>3.6 Clear All Items</h3>
+                <ol>
+                    <li>Click <strong>"Clear All"</strong>.</li>
+                    <li>Confirm with <strong>"OK"</strong>.</li>
+                    <li><strong>Result:</strong>
+                        <ul>
+                            <li>All items are deleted.</li>
+                            <li>Storage is cleared.</li>
+                            <li>UI is updated (buttons hidden).</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>3.7 Filter Items (Search)</h3>
+                <ol>
+                    <li>Type text into the <strong>filter field</strong> (e.g., <code>el</code>).</li>
+                    <li><strong>Result:</strong>
+                        <ul>
+                            <li>Only matching items are shown.</li>
+                            <li>Search is case-insensitive.</li>
+                        </ul>
+                    </li>
+                    <li>To clear filter:
+                        <ul>
+                            <li>Press <kbd>Escape</kbd> while in the filter field <strong>or</strong></li>
+                            <li>Manually clear the input.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>3.8 Clear Input (X Button)</h3>
+                <p>When text is in the input, click the <strong>X</strong> button on the right.</p>
+                <div class="tip">
+                    <strong>Result:</strong> Input is cleared. Edit mode is canceled if active.
+                </div>
+
+                <h3>3.9 Character Counter</h3>
+                <p>While typing, a counter shows <code>X / 15</code> below the input.</p>
+                <ul>
+                    <li>If over 15 characters:
+                        <ul>
+                            <li>Text turns <strong>red</strong>.</li>
+                            <li>Addition is blocked (alert shown).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="shortcuts">
+                <h2>4. Keyboard Shortcuts</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><kbd>Enter</kbd></td>
+                            <td>Add new item / update (except Shift+Enter)</td>
+                        </tr>
+                        <tr>
+                            <td><kbd>Escape</kbd></td>
+                            <td>
+                                <ul>
+                                    <li>Cancel edit</li>
+                                    <li>Clear filter</li>
+                                    <li>Abandon input</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Click</td>
+                            <td>Select / edit item</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="errors">
+                <h2>5. Error & Warning Messages</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Empty input</td>
+                            <td><code>Please input and item!</code></td>
+                        </tr>
+                        <tr>
+                            <td>Duplicate item</td>
+                            <td><code>The item "X" already exists!</code></td>
+                        </tr>
+                        <tr>
+                            <td>Over 15 chars</td>
+                            <td><code>"X" too long (Y character)\nMaximum should be 15 char.</code></td>
+                        </tr>
+                        <tr>
+                            <td>Delete confirm</td>
+                            <td><code>Are you sure delete "X" item?</code></td>
+                        </tr>
+                        <tr>
+                            <td>Clear all confirm</td>
+                            <td><code>Are you sure to delete all?</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="technical">
+                <h2>6. Technical Details</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Storage</strong></td>
+                            <td><code>localStorage</code> → <code>items</code> key</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Format</strong></td>
+                            <td><code>["Milk", "Bread", ...]</code> (JSON string)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Persistence</strong></td>
+                            <td>Items survive browser restart</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Responsive</strong></td>
+                            <td>Mobile & desktop compatible</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accessibility</strong></td>
+                            <td><code>aria-label</code>, focus management, keyboard support</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="developer">
+                <h2>7. Developer Notes</h2>
+                <h3>Added Features:</h3>
+                <ul>
+                    <li>Input clear button (X)</li>
+                    <li>Character limit and counter</li>
+                    <li>Global <kbd>Escape</kbd> support</li>
+                    <li>"Cancel" button</li>
+                    <li>Filter reset with <kbd>Escape</kbd></li>
+                    <li>Mobile UX improvements</li>
+                </ul>
+                <h3>Libraries Used:</h3>
+                <ul>
+                    <li>Font Awesome 6.1.2 (for icons)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>8. Version Info</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>Version</strong></td>
+                            <td>1.0.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Developer</strong></td>
+                            <td>Anton Wise</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date</strong></td>
+                            <td>2025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>License</strong></td>
+                            <td>Personal / Educational Use</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>Congratulations!</strong> You can now fully use and manage the To-Do App.</p>
+            <div class="tip" style="display: inline-block; margin-top: 1rem; background: rgba(255,255,255,0.1); border: none;">
+                <strong>Tip:</strong> The <kbd>Escape</kbd> key is the fastest way to <strong>cancel</strong> and <strong>reset</strong> in any situation.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
