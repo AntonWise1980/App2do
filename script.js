@@ -225,9 +225,12 @@ function removeItemFromStorage(item){
 }
 
 // Function remove all items from the list.
-function clearItems(){
-    while(ITEM_LIST.firstChild){
+function clearItemsAll(){
+
+    if(confirm ("Are you sure to delete all?")){
+        while(ITEM_LIST.firstChild){
         ITEM_LIST.removeChild(ITEM_LIST.firstChild);
+        }
     }
     localStorage.removeItem('items');
     updateUI();
@@ -358,7 +361,7 @@ ITEM_INPUT.addEventListener('keydown', handIeInputEscKeydown) // when user after
 ITEM_FORM.addEventListener('submit', onSubmitFormAddItem) // when user submit form by clicking Add Item button.
 CANCEL_BUTTON_FOR_EDIT.addEventListener('click', cancelFunc) // when user choose any item to edit show button cancel to give up.
 ITEM_LIST.addEventListener('click', onClickItem) // when user choose any item from the list to edit it or delete it.
-CLEAR_BTN_ALL.addEventListener('click', clearItems) // when user click Clear All Items button.
+CLEAR_BTN_ALL.addEventListener('click', clearItemsAll) // when user click Clear All Items button.
 ITEM_FILTER_INPUT.addEventListener('input',filterItems) // when user search item in filter area bring them.
 ITEM_FILTER_INPUT.addEventListener('keydown', handleFilterEscape) // when user start to search then give up and push Esc key. reset list.
 document.addEventListener('keydown', globalEscapeKey) // when the edit-mode on, user give up change anything push Esc key.
