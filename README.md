@@ -4,8 +4,10 @@ I implemented a few missing functions that I noticed during development myself. 
 Anton Wise,
 2025
 
-## Demo
-https://antonwise1980.github.io/App2do/
+# 🚀 To-Do App (Live Demo)
+
+[![Live App](https://img.shields.io/badge/📱_Live_Demo-Open_App-success?style=for-the-badge&logo=github)](https://antonwise1980.github.io/App2do/)
+[![User Guide](https://img.shields.io/badge/📚_User_Guide-Read_Docs-blue?style=for-the-badge&logo=github)](https://antonwise1980.github.io/App2do/docs/)
 
 # Documentation
 [![To-Do App Documentation](https://img.shields.io/badge/Docs-ToDo_App_User_Guide-blue?style=for-the-badge&logo=github)](https://antonwise.github.io/App2do/docs/index.html)
@@ -26,6 +28,13 @@ https://antonwise1980.github.io/App2do/
 | **Duplicate Prevention** | Can't add the same item twice |
 | **Visual Edit Mode** | Edited item turns gray, button turns green |
 | **Clear All** | Remove all items with one click |
+
+### 📂 Klasör Yapısı
+/App2do
+├── index.html       ← Ana uygulama
+├── docs/
+│   └── index.html   ← Kullanıcı kılavuzu
+└── README.md
 
 ## Technologies
 
