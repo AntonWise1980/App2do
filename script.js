@@ -29,6 +29,20 @@ function displayItems(){
 // Function for addItem.
 function onSubmitFormAddItem (e){
     e.preventDefault(); // because not using yet local storage.
+    
+        // In the beginning how many item I have?
+const currentItemCount = getItemFromStorage().length;
+
+// If I am not in the edit-mode and already have 10 items prevent.
+if (!isEditMode && currentItemCount >= 10) {
+    alert('Max 10 items can added!');
+    ITEM_INPUT.value = '';
+    updateCharCount();
+    updateClearButton();
+    return;
+}
+    
+    
     // get the new item from item input value.
     const newItem = ITEM_INPUT.value.trim(); // "   " for prevend many spaces..
     //simple validate input value
@@ -287,6 +301,12 @@ function updateUI (){
     FORM_BUTTON_ADD_ITEM.style.backgroundColor = '#333';
     isEditMode = false;
     updateClearButton();
+    // updateUI içinde, mesela filter input altında gösterim için:
+    const itemCountDisplay = document.getElementById('item-count');
+    if (itemCountDisplay) {
+    const count = getItemFromStorage().length;
+    itemCountDisplay.textContent = `${count}/10 Item`;
+    }
 }
 
 // Function to be used if the user wants to add an element by only pressing the "Enter" key or if they choose not to enter with the Escape key.
